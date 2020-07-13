@@ -254,6 +254,15 @@ public class VideoRecorder extends Plugin {
     }
 
     @PluginMethod()
+    public void requestVideoPermission(PluginCall call) {
+      fancyCamera = new FancyCamera(this.getContext());
+      if (!fancyCamera.hasPermission()) {
+        fancyCamera.requestPermission();
+      }
+      call.success();
+    }
+    
+    @PluginMethod()
     public void hidePreviewFrame(PluginCall call) {
         makeOpaque();
         fancyCamera.stop();
