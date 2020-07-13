@@ -91,8 +91,12 @@ public class VideoRecorder extends Plugin {
                     @Override
                     public void run() {
                         JSObject object = new JSObject();
-                        double db = fancyCamera != null ? fancyCamera.getDB() : 0;
-                        object.put("value", db);
+                        try {
+                          double db = fancyCamera != null ? fancyCamera.getDB() : 0;
+                          object.put("value", db);
+                        } catch (Exception ignored) {
+                          object.put("value", 0);
+                        }
                         notifyListeners("onVolumeInput", object);
                     }
                 });
